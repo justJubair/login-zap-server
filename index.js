@@ -44,7 +44,12 @@ async function run() {
 
     // GET;  employees
     app.get("/employees", async(req,res)=>{
-        const result = await employeesCollection.find().toArray()
+        const filter = req?.query;
+        const query = {
+            name: {$regex: filter.searchText, $options: "i"}
+        }
+        const cursor = employeesCollection.find(query);
+        const result = await cursor.toArray()
         res.send(result)
     })
 
