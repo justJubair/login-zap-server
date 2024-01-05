@@ -41,6 +41,13 @@ async function run() {
         res.send(result)
     })
 
+
+    // GET; a employee
+    app.get("/employees", async(req,res)=>{
+        const result = await employeesCollection.find().toArray()
+        res.send(result)
+    })
+
     // POST; a employee
     app.post("/employees", async(req,res)=>{
         const employee = req?.body;
