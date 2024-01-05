@@ -42,13 +42,21 @@ async function run() {
     })
 
 
-    // GET; an employee
+    // GET;  employees
     app.get("/employees", async(req,res)=>{
         const result = await employeesCollection.find().toArray()
         res.send(result)
     })
 
-    // POST; a employee
+    // GET; an employee
+    app.get("/employee/:id", async(req,res)=>{
+        const id = req?.params?.id;
+        const query = {_id: new ObjectId(id)}
+        const result = await employeesCollection.findOne(query)
+        res.send(result)
+    })
+
+    // POST; an employee
     app.post("/employees", async(req,res)=>{
         const employee = req?.body;
         const result = await employeesCollection.insertOne(employee)
