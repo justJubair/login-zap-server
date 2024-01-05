@@ -31,12 +31,20 @@ async function run() {
     
     // Database collections
     const usersCollection = client.db("loginZapDB").collection("users")
+    const employeesCollection = client.db("loginZapDB").collection("employees")
 
 
     // POST; a users
     app.post("/users", async(req,res)=>{
         const user = req?.body;
         const result = await usersCollection.insertOne(user)
+        res.send(result)
+    })
+
+    // POST; a employee
+    app.post("/employees", async(req,res)=>{
+        const employee = req?.body;
+        const result = await employeesCollection.insertOne(employee)
         res.send(result)
     })
 
